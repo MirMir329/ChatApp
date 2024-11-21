@@ -1,0 +1,42 @@
+.gallery {
+    width: 100%;
+    display: flex;
+    position: relative;
+
+    .user-title {
+        width: 100%;
+        position: fixed;
+        height: 8%;
+        display: flex;
+        gap: 2%;
+        padding: 30px;
+        align-items: center;
+        font-size: 18px;
+        background-color:rgb(54 74 94);;
+
+        img {
+            width: 16px;
+            height: 16px;
+            cursor: pointer;
+        }
+    }
+
+    .photos {
+        width: 100%;
+        padding: 15px 20px;
+        padding-top: 20%;
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        gap: 20px;
+
+        .photo {
+            width: 130px;
+            height: 110px;
+            border-radius: 5%;
+            object-fit: contain;
+            cursor: pointer;
+        }
+    }
+}
+
