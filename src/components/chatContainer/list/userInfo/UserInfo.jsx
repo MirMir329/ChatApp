@@ -1,4 +1,5 @@
 import { useState } from "react"
+import { useChatStore } from "../../../../lib/chatStore.js"
 import { useUserStore } from "../../../../lib/userStore"
 import "./userInfo.scss"
 import { auth } from "../../../../lib/firebase.js"
@@ -8,7 +9,16 @@ const UserInfo = () => {
 
     const [isOpen, setIsOpen] = useState(false)
 
-    const { currentUser } = useUserStore()
+    const { resetUser, resetChatId, resetIsShowInfo } = useChatStore();
+    const { currentUser, fetchUserInfo } = useUserStore()
+
+    const logOut = () => {
+        auth.signOut()
+        resetUser()
+        resetChatId()
+        resetIsShowInfo()
+        fetchUserInfo()
+    }
 
     return (
         <div className="userInfo">
@@ -21,7 +31,7 @@ const UserInfo = () => {
                     <img src="./more.png" alt=""  onClick={() => setIsOpen((prev) => !prev)} />
                     {isOpen && (
                         <div className="more-details">
-                            <p onClick={() => auth.signOut()}>Logout</p>
+                            <p onClick={logOut}>Logout</p>
                             {/* <button className="logout" onClick={()=>auth.signOut()}>Logout</button> */}
                         </div>
                     )}

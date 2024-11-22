@@ -36,5 +36,8 @@ export const useUserStore = create((set) => ({
         console.log(error);
         return set({currentUser: null, isLoading: false});
     }
+  },
+  resetCurrentUser: () => {
+    set(state => ({...state, currentUser: null}))
   }
 }))

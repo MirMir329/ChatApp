@@ -18,7 +18,7 @@ const Chat = () => {
 
     })  
     const { currentUser } = useUserStore()
-    const { chatId, user, isCurrentUserBlocked, isReceiverBlocked, changeShowInfo } = useChatStore()
+    const { chatId, user, isCurrentUserBlocked, isReceiverBlocked, changeShowInfo, setModalImageInfo } = useChatStore()
     
     const date = new Date();
 
@@ -44,62 +44,60 @@ const Chat = () => {
     }
 
     const handleImg = (e) => {
-        console.log("12312");
         if(e.target.files[0]) {
-            console.log(e.target.files);
+            setModalImageInfo({
+                file: e.target.files[0],
+                url: URL.createObjectURL(e.target.files[0])
+            })
+
             setImg({
                 file: e.target.files[0],
                 url: URL.createObjectURL(e.target.files[0])
             })
             e.target.value = ''
-            console.log("Картинка была отправлена!");
-            
         } else {
-            console.log("Не получилось!");
             console.log(e.target.files);
-            
         }
-
     }
 
     const handleSend = async () => {
         if(text === "") return;
 
-        let imgUrl = null
+        // let imgUrl = null
 
         try {
 
-            if(img.file) {
-                imgUrl = await upload(img.file)
+            // if(img.file) {
+            //     imgUrl = await upload(img.file)
 
-                const chatsImgDocRef = doc(db, "chats", chatId);
+            //     const chatsImgDocRef = doc(db, "chats", chatId);
 
-                try {
-                    const chatsImgDocSnap = await getDoc(chatsImgDocRef);
-                    console.log(chatsImgDocSnap);
+            //     try {
+            //         const chatsImgDocSnap = await getDoc(chatsImgDocRef);
+            //         console.log(chatsImgDocSnap);
                 
-                if (chatsImgDocSnap.exists()) {
-                    const data = chatsImgDocSnap.data();
-                    console.log(data);
+            //     if (chatsImgDocSnap.exists()) {
+            //         const data = chatsImgDocSnap.data();
+            //         console.log(data);
                     
-                    await updateDoc(chatsImgDocRef, {
-                        images: arrayUnion(imgUrl)
-                    });
-                } else {
-                    console.log("No such document!");
-                }
-                } catch (error) {
-                    console.error("Error updating document: ", error);
-                }
+            //         await updateDoc(chatsImgDocRef, {
+            //             images: arrayUnion(imgUrl)
+            //         });
+            //     } else {
+            //         console.log("No such document!");
+            //     }
+            //     } catch (error) {
+            //         console.error("Error updating document: ", error);
+            //     }
 
-            }
+            // }
 
             await updateDoc(doc(db, "chats", chatId), {
                 messages:arrayUnion({
                     senderId: currentUser.id,
                     text,
                     createdAt: new Date(),
-                    ...(imgUrl && {img: imgUrl}),
+                    // ...(imgUrl && {img: imgUrl}),
                 }),
             });
 

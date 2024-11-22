@@ -92,6 +92,8 @@ const Login = () => {
         try {
             await signInWithEmailAndPassword(auth, email, password)
 
+            fetchUserInfo()
+
             toast.success("Welcome!")
         } catch (error) {
            console.log(error);

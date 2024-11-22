@@ -5,7 +5,7 @@ import { useUserStore } from './userStore';
 
 export const useChatStore = create((set) => ({
   isShowModalImageInfo: false,
-  imageInfo: "",
+  imageInfo: {},
 
   isShowInfo: false,
   isShowModalGallery: false,
@@ -57,18 +57,32 @@ export const useChatStore = create((set) => ({
   changeShowModalGallery: () => {
     set(state => ({...state, isShowModalGallery: !state.isShowModalGallery}))
   },
-  setModalGalleryImage: (url) => {
-    set(state => ({...state, modalGalleryImage: url, isShowModalGallery: !state.isShowModalGallery}))
-  },
-
   changeShowModalImageInfo: () => {
     set(state => ({...state, isShowModalImageInfo: !state.isShowModalImageInfo}))
+  },
+
+  setModalGalleryImage: (url) => {
+    set(state => ({...state, modalGalleryImage: url, isShowModalGallery: !state.isShowModalGallery}))
   },
   setModalImageInfo: (url) => {
     set(state => ({...state, imageInfo: url, isShowModalImageInfo: !state.isShowModalImageInfo}))
   },
+
   resetModalGalleryImage: () => {
     set(state => ({...state, imageInfo: ""}))
-  }
+  },
+  resetUser: () => {
+    set(state => ({...state, user: null}))
+  },
+  resetChatId: () => {
+    set(state => ({...state, chatId: null}))
+  },
+  resetIsShowInfo: () => {
+    set(state => ({...state, isShowInfo: false}))
+  },
+  resetModalImageInfo: () => {
+    set(state => ({...state, imageInfo: {}}))
+  },
+
 
 }))

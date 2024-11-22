@@ -34,11 +34,6 @@ const Detail = () => {
 
     return (
         <div className="detail">
-            {/* {!isShowGallery && isShowInfo ? (
-                <UserDetail setIsShowGallery={setIsShowGallery} imagesSlice={imagesSlice}/>
-            ) : (
-                <Gallery setIsShowGallery={setIsShowGallery} images={images}/>
-            )} */}
             {isShowGallery ? (
                 <Gallery setIsShowGallery={setIsShowGallery} images={images}/>
                 

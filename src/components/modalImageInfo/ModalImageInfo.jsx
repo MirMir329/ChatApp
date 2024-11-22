@@ -1,23 +1,36 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { useChatStore } from "../../lib/chatStore.js"
 import "./modalImageInfo.scss"
+import { arrayUnion, doc, getDoc, updateDoc } from "firebase/firestore"
+import { db } from "../../lib/firebase"
+import upload from "../../lib/upload"
+import { useUserStore } from "../../lib/userStore"
 
 const ModalImageInfo = () => {
-  const { changeShowModalImageInfo, resetModalGalleryImage, imageInfo } = useChatStore()
+
+  const { currentUser } = useUserStore()
+  const { changeShowModalImageInfo, resetModalGalleryImage, imageInfo, chatId, resetModalImageInfo, user } = useChatStore()
+
+  const [text, setText] = useState("")
 
   const closeModalImageInfo = () => {
     changeShowModalImageInfo()
     resetModalGalleryImage()
   }
 
-  const handleSend = async () => {
+  const handleSend = async (e) => {
+    e.preventDefault()
+    console.log(imageInfo);
 
     let imgUrl = null
 
     try {
-      if(img.file) {
-        imgUrl = await upload(img.file)
+      if(imageInfo.file) {
+        // imgUrl = await upload(imageInfo)
+        imgUrl = await upload(imageInfo.file)
         const chatsImgDocRef = doc(db, "chats", chatId); // Укажите правильный путь к документу
+
+        console.log(imgUrl);
 
         try {
           // Получаем текущие данные
@@ -49,6 +62,17 @@ const ModalImageInfo = () => {
             ...(imgUrl && {img: imgUrl}),
           }),
         });
+      } else {
+        await updateDoc(doc(db, "chats", chatId), {
+          messages:arrayUnion({
+            senderId: currentUser.id,
+            createdAt: new Date(),
+            ...(imgUrl && {img: imgUrl}),
+          }),
+        });
+      }
+
+        
 
         const userIDs = [currentUser.id, user.id]
 
@@ -69,35 +93,26 @@ const ModalImageInfo = () => {
             chats: userChatsData.chats,
           })
         }
-      })}
+      })
     } catch (err) {
       console.log(err);
     }
 
-    setImg({
-      file: null,
-      url: ""
-    })
+    resetModalImageInfo()
+    changeShowModalImageInfo()
 
     setText("")
   }
-      
-
-      
-
     
-
-    
-
   return (
     <div className='background-modal'>
         <div className='modal-image-info'>
           <div className='image-container'>
-            <img className='image' src={imageInfo} alt="#" />
+            <img className='image' src={imageInfo.url} alt="#" />
           </div>
           <form className='form'>
-            <input type="text" placeholder='Введите текст, если нужно'/>
-            <button onClick={handleSend} className='sendButton'>Send</button>
+            <input type="text" onChange={(e) => setText(e.target.value)} placeholder='Введите текст, если нужно'/>
+            <button onClick={(e) => handleSend(e)} className='sendButton'>Send</button>
           </form>
           <img onClick={closeModalImageInfo} className='cross' src="./cross.png" alt="#" />
         </div>
