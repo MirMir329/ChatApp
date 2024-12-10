@@ -1,0 +1,395 @@
+.chat {
+    flex: 1.5;
+    border-left: 1px solid #dddddd35;
+    border-right: 1px solid #dddddd35;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+
+    .top {
+        padding: 20px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        border-bottom: 1px solid #dddddd35;
+        transition: 0.8s;
+        cursor: pointer;
+
+        .user {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+
+            img {
+                width: 60px;
+                height: 60px;
+                border-radius: 50%;
+                object-fit: cover;
+            }
+
+            .texts {
+                display: flex;
+                flex-direction: column;
+                gap: 5px;
+
+                span {
+                    font-size: 18px;
+                    font-weight: bold;
+                }
+
+                p {
+                    font-size: 14px;
+                    font-weight: 300;
+                    color: #a5a5a5;
+                }   
+            }
+            @media (max-width: 420px) {
+                gap: 10px;
+            }
+        }
+
+        .cross {
+            display: none;
+            width: 16px;
+            height: 16px;
+            cursor: pointer;
+
+            @media (max-width: 800px) {
+                display: block;
+            }
+        }
+
+        @media (max-width: 420px) {
+            padding: 20px 10px 20px;
+        }
+    }
+
+    .center {
+        padding: 20px;
+        // flex: 1;
+        overflow-y: scroll;
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+
+        .message {
+            // position: relative;
+            max-width: 70%;
+            width: fit-content;
+            // min-width: 5%;
+            display: flex;
+            gap: 20px;
+            position: relative;
+
+            .hover-arrow {
+                display: none;
+                position: absolute;
+                top: 0;
+                left: 0;
+                width: 45px;
+                height: 35px;
+                border-bottom-right-radius: 20%;     
+                border-top-left-radius: 10px;             
+                background-color: rgba(17, 25, 40, 0.802);
+
+                .arrowDownBtn {
+                    position: absolute;
+                    top: 5%;
+                    left: 5%;
+                    width: 20px;
+                    height: 20px;
+                    cursor: pointer;
+                    margin: 5px 0 0 10px;
+                }
+            }
+
+            &.own {
+                align-self: flex-end;
+
+                .hover-arrow-own {
+                    display: none;
+                    position: absolute;
+                    top: 0;
+                    right: 0;
+                    width: 45px;
+                    height: 35px;
+                    border-bottom-left-radius: 20%;     
+                    border-top-right-radius: 10px;              
+                    background-color: #4671ded9;
+    
+                    .arrowDownBtn-own {
+                        position: absolute;
+                        top: 5%;
+                        right: 5%;
+                        width: 20px;
+                        height: 20px;
+                        cursor: pointer;
+                        margin: 5px 10px 0 0;
+                    }
+                }
+            
+                .texts {
+                    min-width: 70px;
+                    background-color: #5183fe;
+                }
+
+            }
+              
+            &:hover .hover-arrow  {
+                display: block;
+            }
+
+            &:hover .hover-arrow-own  {
+                display: block;
+            }
+
+            img {
+                width: 50px;
+                height: 50px;
+                border-radius: 50%;
+                object-fit: cover;
+            }
+            .texts {
+                min-width: 70px;
+                position: relative;
+                display: flex;
+                flex-direction: column;
+                font-size: 14.2px;
+                padding: 10px 10px 15px;
+                background-color: rgba(17, 25, 40, 0.3);
+                border-radius: 10px;
+                justify-content: flex-end;
+                overflow-wrap: break-word;
+                word-wrap: break-word; /* для совместимости со старыми браузерами */
+                word-break: break-all;
+
+                img {
+                    width: 100%;
+                    max-width: 500px;
+                    height: 300px;
+                    border-radius: 10px;
+                    object-fit: cover;
+                    margin-bottom: 15px;
+
+                    @media (max-width: 1200px) {
+                        max-width: 300px;
+                        max-height: 250px;
+                        height: auto;
+                    }
+                }
+
+                audio {
+                    margin-right: 20px;
+                    margin-bottom: 10px;
+
+                    @media (max-width: 920px) {
+                        width: 250px;
+                    }
+                }
+
+                span {
+                    padding: 5px;
+                    margin-bottom: 10px;
+                    font-size: 14.2px;
+                }
+
+                .time {
+                    position: absolute;
+                    bottom: 0;
+                    right: 5px;
+                    margin-bottom: 0;
+                    font-size: 12px;
+                    color: #a5a5a5;
+                }
+
+                .doc {
+                    width: 100%;                   
+                    padding: 15px 25px 15px;
+                    margin-bottom: 15px;                   
+                    background-color: rgba(12, 17, 27, 0.3);
+                    border-radius: 5px;
+
+                    a {
+                        display: flex;
+                        gap: 20px;
+                        align-items: center;
+                        text-decoration: none;
+                        color: white;
+
+                        .icon {
+                            width: 35px;
+                            height: 35px;
+                        }
+
+                        img {
+                            border-radius: 0;
+                            width: 30px;
+                            height: 30px;
+                            margin: 0;
+                            object-fit: contain;
+                        }
+
+                        @media (max-width: 1225px) {
+                            gap: 10px;
+                        }
+                    }
+
+                    @media (max-width: 1225px) {
+                        padding: 15px;
+                    }
+                }
+            }
+            @media (max-width: 1025px) {
+                max-width: 80%;
+            }
+        }
+
+        @media (max-width: 1200px) {
+            padding: 20px 10px 20px;
+        }
+    }
+
+    .bottom {
+        padding: 20px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        border-top: 1px solid #dddddd35;
+        gap: 20px;
+        position: relative;
+        margin-top: auto;
+
+        .plus-background {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+            .plus-icon {
+                transition: transform 0.3s ease;
+                // transform: translate(0);
+            }
+            .plus-icon.plus-anim {
+                transform: rotate(135deg);
+            }
+
+            @media (max-width: 1025px) {
+                width: 30px;
+                height: 30px;
+            }
+        }
+
+        .clicked {
+            background-color: #59595925;
+        }
+
+        .icons {
+            display: flex;
+            flex-direction: column;
+            position: absolute;
+            padding: 10px 5px 10px;
+            // top: -155%;
+            top: -255px;
+            gap: 15px;
+            color: black;
+            background-color: white;
+        }
+        label {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            padding: 15px;
+
+            &:hover {
+                background-color: rgb(236, 236, 236);               
+            }
+        }
+
+        img {
+            width: 25px;
+            height: 25px;
+            cursor: pointer;
+        }
+
+        input {
+            flex: 1;
+            background-color: rgba(17, 25, 40, 0.5);
+            border: none;
+            outline: none;
+            color: white;
+            padding: 20px;
+            border-radius: 10px;
+            font-size: 16px;
+
+            &:disabled{
+                cursor: not-allowed;
+            }
+
+            @media (max-width: 1025px) {
+                padding: 10px;
+                font-size: 14px;
+            }
+        }
+
+        .emoji {
+            position: relative;
+            display: flex;
+            align-items: center;
+
+            .picker {
+                width: 400px;
+                height: 400px;
+                position: absolute;
+                bottom: 50px;
+                left: -300px;
+                @media (max-width: 450px) {
+                    width: 300px;
+                    height: 300px;
+                    left: -220px;
+                }      
+            }
+        }
+
+        .sendButton {
+            background-color: #5183fe;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+
+            &:disabled{
+                background-color: #5182feb4;
+                cursor: not-allowed;
+            }
+
+            @media (max-width: 420px) {
+                padding: 10px;
+            }
+        }
+
+        @media (max-width: 1025px) {
+            padding: 20px 10px 20px;
+            gap: 10px;
+        }
+
+        @media (max-width: 420px) {
+            padding: 20px 7px 20px;
+        }
+    }
+
+    @media (max-width: 1200px) {
+        flex: 1;
+    }
+
+    // @media (max-width: 800px) {
+    //     width: 100vw;
+    //     flex: 0;
+    // }
+}
+
+.remove {
+    display: none;
+}

@@ -1,0 +1,67 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande",
+    "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
+}
+
+body {
+  background-image: url("/bg.jpg");
+  // display: flex;
+  // justify-content: center;
+  // align-items: center;
+  height: 100vh;
+  color: white;
+  position: relative;
+}
+
+.wrapper {
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.container {
+  // max-width: 1440px;
+  width: 98vw;
+  height: 95vh;
+  display: flex;
+  background-color: rgba(17, 25, 40, 0.75);
+  backdrop-filter: blur(19px) saturate(180%);
+  border-radius: 12px;
+  border: 1px solid rgba(255, 255, 255, 0.125);
+  overflow: hidden;
+  // z-index: 1;
+
+  @media (max-width: 1440px) {
+    width: 100%;
+    height: 100%;
+    border-radius: 0;
+    border: 0;
+  }
+}
+
+.loading {
+  padding: 50px;
+  font-size: 36px;
+  border-radius: 10px;
+  background-color: rgba(17, 25, 40, 0.9);
+}
+
+::-webkit-scrollbar {
+  width: 8px; /* Ширина вертикального скроллбара */
+}
+
+/* Фон скроллбара */
+::-webkit-scrollbar-track {
+  background-color: transparent;
+}
+
+/* Цвет скролл-ручки */
+::-webkit-scrollbar-thumb {
+  border-radius: 2px;
+  background-color: rgba(153, 153, 153, 0.393);
+}
